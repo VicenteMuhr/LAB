@@ -1,0 +1,130 @@
+<html>
+<head>
+<title>Main.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Main.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.*;</span>
+
+<span class="s0">class </span><span class="s1">BigVigenere</span><span class="s2">{</span>
+    <span class="s0">static int</span><span class="s2">[] </span><span class="s1">key</span><span class="s2">;</span>
+    <span class="s1">String numericKey</span><span class="s2">;</span>
+    <span class="s0">char</span><span class="s2">[][] </span><span class="s1">alphabet</span><span class="s2">;</span>
+    <span class="s0">final </span><span class="s1">String ALPHABET </span><span class="s2">= </span><span class="s3">&quot;abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&quot;</span><span class="s2">; </span><span class="s4">//Tamaño 64</span>
+
+    <span class="s0">public </span><span class="s1">BigVigenere</span><span class="s2">(</span><span class="s0">int</span><span class="s2">[] </span><span class="s1">contrasena</span><span class="s2">, </span><span class="s0">char</span><span class="s2">[][] </span><span class="s1">alfabeto</span><span class="s2">) {</span>
+        <span class="s1">key </span><span class="s2">= </span><span class="s1">contrasena</span><span class="s2">;</span>
+        <span class="s1">alphabet </span><span class="s2">= </span><span class="s1">alfabeto</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s0">public </span><span class="s1">BigVigenere</span><span class="s2">(){</span>
+        <span class="s1">Scanner sc </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scanner</span><span class="s2">(</span><span class="s1">System</span><span class="s2">.</span><span class="s1">in</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Ingrese su contraseña: &quot;</span><span class="s2">);</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">numericKey </span><span class="s2">= </span><span class="s1">sc</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s0">int </span><span class="s1">N </span><span class="s2">= </span><span class="s1">ALPHABET</span><span class="s2">.</span><span class="s1">length</span><span class="s2">();</span>
+        <span class="s1">alphabet </span><span class="s2">= </span><span class="s0">new char</span><span class="s2">[</span><span class="s1">N</span><span class="s2">][</span><span class="s1">N</span><span class="s2">];</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">N</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">j </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s1">N</span><span class="s2">; </span><span class="s1">j</span><span class="s2">++) {</span>
+                <span class="s1">alphabet</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] = </span><span class="s1">ALPHABET</span><span class="s2">.</span><span class="s1">charAt</span><span class="s2">((</span><span class="s1">i </span><span class="s2">+ </span><span class="s1">j</span><span class="s2">) % </span><span class="s1">N</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+       <span class="s4">/* for(int i = 0; i &lt; N; i++){     En caso de querer ver la matriz entera impresa. 
+            for(int j = 0; j &lt; N; j++){ 
+                System.out.print(alphabet[i][j] + &quot; &quot;); 
+            } 
+            System.out.println(&quot; &quot;); 
+        } */</span>
+        <span class="s1">key </span><span class="s2">= </span><span class="s0">new int</span><span class="s2">[</span><span class="s1">numericKey</span><span class="s2">.</span><span class="s1">length</span><span class="s2">()];</span>
+        <span class="s0">for</span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">numericKey</span><span class="s2">.</span><span class="s1">length</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++){</span>
+            <span class="s0">char </span><span class="s1">C </span><span class="s2">= </span><span class="s1">numericKey</span><span class="s2">.</span><span class="s1">charAt</span><span class="s2">(</span><span class="s1">i</span><span class="s2">);</span>
+            <span class="s1">key</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] = </span><span class="s1">ALPHABET</span><span class="s2">.</span><span class="s1">indexOf</span><span class="s2">(</span><span class="s1">C</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+    <span class="s0">public </span><span class="s1">String encrypt</span><span class="s2">(</span><span class="s1">String message</span><span class="s2">) {</span>
+        <span class="s1">StringBuilder encriptado </span><span class="s2">= </span><span class="s0">new </span><span class="s1">StringBuilder</span><span class="s2">();</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">message</span><span class="s2">.</span><span class="s1">length</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s0">char </span><span class="s1">SrcChar </span><span class="s2">= </span><span class="s1">message</span><span class="s2">.</span><span class="s1">charAt</span><span class="s2">(</span><span class="s1">i</span><span class="s2">);</span>
+            <span class="s0">int </span><span class="s1">messagePosition </span><span class="s2">= </span><span class="s1">ALPHABET</span><span class="s2">.</span><span class="s1">indexOf</span><span class="s2">(</span><span class="s1">SrcChar</span><span class="s2">);</span>
+            <span class="s0">int </span><span class="s1">keyPos </span><span class="s2">= </span><span class="s1">key</span><span class="s2">[</span><span class="s1">i </span><span class="s2">% </span><span class="s1">key</span><span class="s2">.</span><span class="s1">length</span><span class="s2">];</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">messagePosition </span><span class="s2">!= -</span><span class="s5">1</span><span class="s2">) {</span>
+                <span class="s1">encriptado</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">alphabet</span><span class="s2">[</span><span class="s1">messagePosition</span><span class="s2">][</span><span class="s1">keyPos</span><span class="s2">]);</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">encriptado</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">SrcChar</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">encriptado</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">();</span>
+    <span class="s2">}</span>
+    <span class="s0">public </span><span class="s1">String decrypt</span><span class="s2">(</span><span class="s1">String encryptedMessage</span><span class="s2">) {</span>
+        <span class="s1">StringBuilder desencriptado </span><span class="s2">= </span><span class="s0">new </span><span class="s1">StringBuilder</span><span class="s2">();</span>
+        <span class="s0">int </span><span class="s1">N </span><span class="s2">= </span><span class="s1">ALPHABET</span><span class="s2">.</span><span class="s1">length</span><span class="s2">();</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">encryptedMessage</span><span class="s2">.</span><span class="s1">length</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s0">char </span><span class="s1">CharEncriptado </span><span class="s2">= </span><span class="s1">encryptedMessage</span><span class="s2">.</span><span class="s1">charAt</span><span class="s2">(</span><span class="s1">i</span><span class="s2">);</span>
+            <span class="s0">int </span><span class="s1">keyPosition </span><span class="s2">= </span><span class="s1">key</span><span class="s2">[</span><span class="s1">i </span><span class="s2">% </span><span class="s1">key</span><span class="s2">.</span><span class="s1">length</span><span class="s2">];</span>
+
+            <span class="s0">int </span><span class="s1">messagePosition </span><span class="s2">= -</span><span class="s5">1</span><span class="s2">;</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">j </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s1">N</span><span class="s2">; </span><span class="s1">j</span><span class="s2">++) {</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">alphabet</span><span class="s2">[</span><span class="s1">j</span><span class="s2">][</span><span class="s1">keyPosition</span><span class="s2">] == </span><span class="s1">CharEncriptado</span><span class="s2">) {</span>
+                    <span class="s1">messagePosition </span><span class="s2">= </span><span class="s1">j</span><span class="s2">;</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">messagePosition </span><span class="s2">!= -</span><span class="s5">1</span><span class="s2">) {</span>
+                <span class="s1">desencriptado</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">ALPHABET</span><span class="s2">.</span><span class="s1">charAt</span><span class="s2">(</span><span class="s1">messagePosition</span><span class="s2">));</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">desencriptado</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">CharEncriptado</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">desencriptado</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">();</span>
+    <span class="s2">}</span>
+    <span class="s0">public void </span><span class="s1">reEncrypt</span><span class="s2">() {</span>
+        <span class="s1">Scanner scanner </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scanner</span><span class="s2">(</span><span class="s1">System</span><span class="s2">.</span><span class="s1">in</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Ingrese el mensaje cifrado: &quot;</span><span class="s2">);</span>
+        <span class="s1">String encriptado </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s1">String desencriptado </span><span class="s2">= </span><span class="s1">decrypt</span><span class="s2">(</span><span class="s1">encriptado</span><span class="s2">);</span>
+
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Ingrese la nueva clave: &quot;</span><span class="s2">);</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">numericKey </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s1">String reEncriptado </span><span class="s2">= </span><span class="s1">encrypt</span><span class="s2">(</span><span class="s1">desencriptado</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Nuevo mensaje cifrado: &quot; </span><span class="s2">+ </span><span class="s1">reEncriptado</span><span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s0">public char </span><span class="s1">search</span><span class="s2">(</span><span class="s0">int </span><span class="s1">position</span><span class="s2">) {</span>
+        <span class="s0">int </span><span class="s1">fila </span><span class="s2">= </span><span class="s1">position </span><span class="s2">/ </span><span class="s1">ALPHABET</span><span class="s2">.</span><span class="s1">length</span><span class="s2">();</span>
+        <span class="s0">int </span><span class="s1">columna </span><span class="s2">= </span><span class="s1">position </span><span class="s2">% </span><span class="s1">ALPHABET</span><span class="s2">.</span><span class="s1">length</span><span class="s2">();</span>
+        <span class="s0">return </span><span class="s1">alphabet</span><span class="s2">[</span><span class="s1">fila</span><span class="s2">][</span><span class="s1">columna</span><span class="s2">];</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s0">public class </span><span class="s1">Main </span><span class="s2">{</span>
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s1">BigVigenere bigVigenere </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BigVigenere</span><span class="s2">();</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">Arrays</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">(</span><span class="s1">bigVigenere</span><span class="s2">.</span><span class="s1">key</span><span class="s2">));</span>
+
+        <span class="s1">Scanner mensaje </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scanner</span><span class="s2">(</span><span class="s1">System</span><span class="s2">.</span><span class="s1">in</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Ingrese el mensaje a cifrar: &quot;</span><span class="s2">);</span>
+        <span class="s1">String Message </span><span class="s2">= </span><span class="s1">mensaje</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s1">String encriptado </span><span class="s2">= </span><span class="s1">bigVigenere</span><span class="s2">.</span><span class="s1">encrypt</span><span class="s2">(</span><span class="s1">Message</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;El mensaje encriptado es: &quot; </span><span class="s2">+ </span><span class="s1">encriptado</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>
